@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { GoogleMap, LoadScript, Marker, MarkerClusterer, InfoWindow } from '@react-google-maps/api';
 
+import postoIcon from '../assets/img/gas-pump.png';
+
 // Definir a posição padrão e o ícone do marcador
 const defaultPosition = { lat: 41.1579, lng: -8.6291 };
-const postoIcon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"; 
 
 // Tipagem para o posto
 interface Posto {
@@ -76,7 +77,7 @@ const MapComponent = () => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="chave_google_maps" libraries={['visualization']}>
+    <LoadScript googleMapsApiKey="ApiKey" libraries={['visualization']}>
       <div style={{ width: "100%", height: "100%" }}>
         {/* Exibir indicador de loading enquanto os dados não estiverem carregados */}
         {loading ? (
@@ -105,9 +106,12 @@ const MapComponent = () => {
                       <Marker
                         key={posto.Id}
                         position={{ lat: posto.Latitude, lng: posto.Longitude }}
-                        icon={postoIcon}
-                        label={posto.Nome}
-                        title={posto.Preco}
+                        icon={{
+                          url: postoIcon,
+                          scaledSize: new google.maps.Size(25, 25),  // Ajuste o tamanho do ícone aqui
+                          origin: new google.maps.Point(0, 0),  // Posição inicial do ícone
+                          anchor: new google.maps.Point(4,4),  // Ajuste a âncora do ícone para o centro
+                        }}
                         onClick={() => onMarkerClick(posto)} // Chama a função ao clicar no marcador
                         clusterer={clusterer}  // Atribui o clusterer ao marcador
                       />

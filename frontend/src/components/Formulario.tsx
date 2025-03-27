@@ -4,12 +4,14 @@ import MarcaSelector from './MarcaSelector';
 import MunicipioSelector from './MunicipioSelector';
 import DistritoSelector from './DistritosSelector';
 import '../styles/Formulario.css';
+import TiposPostosSelector from './TiposPostos';
 
 
 const Formulario = () => {
   const [combustivel, setCombustivel] = useState('');
   const [marca, setMarca] = useState('');
   const [municipio, setMunicipio] = useState('');
+  const [distritoId, setDistritoId] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,10 +23,11 @@ const Formulario = () => {
     <h2>FILTROS:</h2>
     
     <div className="select-group" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1.2rem' }}>
-      <DistritoSelector />
+    <DistritoSelector onDistritoChange={setDistritoId} />
+    <MunicipioSelector distritoId={distritoId} />
       <CombustivelSelector />
       <MarcaSelector />
-      <MunicipioSelector />
+      <TiposPostosSelector />
     </div>
 
     <div className="button-group">
