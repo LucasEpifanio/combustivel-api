@@ -11,3 +11,5 @@ export const getDistritos = async () => {
     throw error;
   }
 };
+
+

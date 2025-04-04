@@ -77,7 +77,7 @@ const MapComponent = () => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="ApiKey" libraries={['visualization']}>
+    <LoadScript googleMapsApiKey="" libraries={['visualization']}>
       <div style={{ width: "100%", height: "100%" }}>
         {/* Exibir indicador de loading enquanto os dados não estiverem carregados */}
         {loading ? (
@@ -88,11 +88,17 @@ const MapComponent = () => {
           </div>
         ) : (
           <GoogleMap
-            mapContainerStyle={{ width: '100%', height: '100%' }}
-            center={position}
-            zoom={zoom}
-            onBoundsChanged={() => onBoundsChanged} // Chama a função quando os limites mudarem
-          >
+          mapContainerStyle={{
+            width: '100%',
+            height: '100%',
+            border: '1px solid rgba(255, 255, 255, 0.7)',  // Borda sutil
+            borderRadius: '10px',  // Bordas arredondadas
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'  // Sombra sutil
+          }}
+          center={position}
+          zoom={zoom}
+          onBoundsChanged={() => onBoundsChanged} // Chama a função quando os limites mudarem
+        >
             {/* Marcador para a localização atual */}
             <Marker position={position} />
 

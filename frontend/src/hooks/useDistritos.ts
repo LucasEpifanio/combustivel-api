@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { getDistritos } from '../api/distritos';
 
-// Tipando o Combustivel
 interface Distrito {
-    id: number;
-    Descritivo: string;
+  Id: number;
+  Descritivo: string;
 }
 
 const useDistritos = () => {
-  const [distritos, setDistritos] = useState<Distrito[]>([]);  // Tipando o estado
+  const [distritos, setDistritos] = useState<Distrito[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,8 +16,8 @@ const useDistritos = () => {
       try {
         const data = await getDistritos();
         setDistritos(data);
-      } catch (err) {
-        setError('Erro ao carregar combustíveis');
+      } catch {
+        setError('Erro ao carregar distritos.');
       } finally {
         setLoading(false);
       }
